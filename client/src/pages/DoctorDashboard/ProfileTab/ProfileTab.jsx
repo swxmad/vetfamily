@@ -92,7 +92,7 @@ const ProfileTab = ({ user, onUpdate }) => {
 
     setLoading(true);
     try {
-      const response = await axiosInstance.put('/api/doctor/profile', {
+      const response = await axiosInstance.put('/doctor/profile', {
         fullName: formData.fullName,
         gender: formData.gender,
         birthDate: formatDateForServer(formData.birthDate),
