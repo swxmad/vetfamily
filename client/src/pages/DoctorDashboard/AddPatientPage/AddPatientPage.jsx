@@ -90,7 +90,7 @@ const AddPatientPage = () => {
 
     setLoading(true);
     try {
-      const response = await axiosInstance.post('/doctor/patients', formData);
+      const response = await axiosInstance.post('/api/doctor/patients', formData);
       if (response.data.success) {
         alert('Пациент успешно добавлен!');
         navigate(`/doctor/patient/${response.data.patient.id}`);

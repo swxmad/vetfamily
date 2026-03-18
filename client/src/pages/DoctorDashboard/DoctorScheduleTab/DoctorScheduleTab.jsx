@@ -18,7 +18,7 @@ const DoctorScheduleTab = () => {
       const params = new URLSearchParams();
       if (from) params.append('from', from);
       if (to) params.append('to', to);
-      const response = await axiosInstance.get(`/visits/schedule?${params.toString()}`);
+      const response = await axiosInstance.get(`/api/visits/schedule?${params.toString()}`);
       if (response.data.success) {
         setVisits(response.data.visits || []);
       }

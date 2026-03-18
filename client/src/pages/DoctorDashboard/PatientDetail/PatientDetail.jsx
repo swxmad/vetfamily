@@ -29,8 +29,8 @@ const PatientDetail = () => {
   const fetchPatientData = async () => {
     try {
       const [patientRes, visitsRes] = await Promise.all([
-        axiosInstance.get(`/doctor/patients/${id}`),
-        axiosInstance.get(`/visits/patient/${id}`)
+        axiosInstance.get(`/api/doctor/patients/${id}`),
+        axiosInstance.get(`/api/visits/patient/${id}`)
       ]);
       if (patientRes.data.success) setPatient(patientRes.data.patient);
       if (visitsRes.data.success) setVisits(visitsRes.data.visits);
@@ -53,7 +53,7 @@ const PatientDetail = () => {
       }
     }
     try {
-      const response = await axiosInstance.post('/visits', {
+      const response = await axiosInstance.post('/api/visits', {
         patientId: id,
         ...visitForm
       });

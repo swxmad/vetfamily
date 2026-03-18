@@ -19,7 +19,7 @@ const PatientsTab = () => {
     setLoading(true);
     try {
       console.log('Запрос пациентов, статус:', activeStatusTab);
-      const response = await axiosInstance.get(`/doctor/patients/status?status=${activeStatusTab}`);
+      const response = await axiosInstance.get(`/api/doctor/patients/status?status=${activeStatusTab}`);
       console.log('Ответ сервера:', response.data);
       if (response.data.success) {
         setPatients(response.data.patients);

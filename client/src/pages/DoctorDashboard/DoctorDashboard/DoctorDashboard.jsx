@@ -32,7 +32,7 @@ const DoctorDashboard = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axiosInstance.get('/doctor/profile');
+      const response = await axiosInstance.get('/api/doctor/profile');
       if (response.data.success) {
         setUser(response.data.user);
         localStorage.setItem('user', JSON.stringify(response.data.user));
