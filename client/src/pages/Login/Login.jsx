@@ -33,7 +33,7 @@ const Login = () => {
     console.log('Отправка формы:', formData);
 
     try {
-      const response = await axiosInstance.post('/auth/login', {
+      const response = await axiosInstance.post('/api/auth/login', {
         email: formData.email,
         password: formData.password
       });

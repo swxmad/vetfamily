@@ -174,7 +174,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axiosInstance.post('/auth/register', {
+      const response = await axiosInstance.post('/api/auth/register', {
         fullName: formData.fullName,
         gender: formData.gender,
         birthDate: formData.birthDate.split('.').reverse().join('-'),
