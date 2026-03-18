@@ -28,7 +28,7 @@ const AdminPatientDetail = () => {
 
   const fetchPatientData = async () => {
     try {
-      const patientRes = await axiosInstance.get(`/admin/patients/${id}`);
+      const patientRes = await axiosInstance.get(`/api/admin/patients/${id}`);
 
       if (patientRes.data.success) {
         setPatient(patientRes.data.patient);
@@ -53,7 +53,7 @@ const AdminPatientDetail = () => {
       }
     }
     try {
-      const response = await axiosInstance.post('/visits', {
+      const response = await axiosInstance.post('/api/visits', {
         patientId: id,
         ...visitForm
       });
@@ -78,7 +78,7 @@ const AdminPatientDetail = () => {
   const handleCompleteTreatment = async () => {
     if (!window.confirm('Завершить лечение пациента?')) return;
     try {
-      const response = await axiosInstance.put(`/admin/patients/${id}/complete`);
+      const response = await axiosInstance.put(`/api/admin/patients/${id}/complete`);
       if (response.data.success) {
         alert('Лечение завершено!');
         fetchPatientData();
@@ -91,7 +91,7 @@ const AdminPatientDetail = () => {
   const handleRestoreTreatment = async () => {
     if (!window.confirm('Вернуть карту пациента в активные?')) return;
     try {
-      const response = await axiosInstance.put(`/admin/patients/${id}/restore`);
+      const response = await axiosInstance.put(`/api/admin/patients/${id}/restore`);
       if (response.data.success) {
         alert('Карта пациента возвращена в активные!');
         fetchPatientData();
@@ -130,10 +130,10 @@ const AdminPatientDetail = () => {
     if (!window.confirm('Вы уверены, что хотите удалить этого пациента? Все данные будут удалены безвозвратно!')) return;
 
     try {
-      const response = await axiosInstance.delete(`/admin/patients/${id}`);
+      const response = await axiosInstance.delete(`/api/admin/patients/${id}`);
       if (response.data.success) {
         alert('Пациент удалён из системы');
-        navigate('/admin?tab=patients');
+        navigate('/api/admin?tab=patients');
       }
     } catch (error) {
       console.error('Ошибка удаления:', error);
@@ -200,7 +200,7 @@ const AdminPatientDetail = () => {
       <main className={styles.main}>
         <div className={styles.patientDetail}>
           <div className={styles.header}>
-            <button className={styles.backButton} onClick={() => navigate('/admin?tab=patients')}>Назад</button>
+            <button className={styles.backButton} onClick={() => navigate('/api/admin?tab=patients')}>Назад</button>
             <h1>{patient.name}</h1>
             <div className={styles.actions}>
               <button className={styles.printButton} onClick={handlePrint}>Печать</button>

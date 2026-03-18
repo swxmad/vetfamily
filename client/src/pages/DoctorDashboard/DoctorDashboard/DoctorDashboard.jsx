@@ -32,7 +32,7 @@ const DoctorDashboard = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axiosInstance.get('/doctor/profile');
+      const response = await axiosInstance.get('/api/doctor/profile');
       if (response.data.success) {
         setUser(response.data.user);
         localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -40,7 +40,7 @@ const DoctorDashboard = () => {
     } catch (error) {
       console.error('Ошибка получения профиля:', error);
       if (error.response?.status === 401) {
-        navigate('/login');
+        navigate('/api/login');
       }
     } finally {
       setLoading(false);
@@ -49,13 +49,13 @@ const DoctorDashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await axiosInstance.post('/auth/logout');
+      await axiosInstance.post('/api/auth/logout');
       localStorage.removeItem('user');
-      navigate('/login');
+      navigate('/api/login');
     } catch (error) {
       console.error('Ошибка выхода:', error);
       localStorage.removeItem('user');
-      navigate('/login');
+      navigate('/api/login');
     }
   };
 

@@ -93,7 +93,7 @@ const AddPatientModal = ({ onClose, onPatientAdded }) => {
   
   setLoading(true);
   try {
-    const response = await axiosInstance.post('/doctor/patients', formData);
+    const response = await axiosInstance.post('/api/doctor/patients', formData);
     console.log('Ответ от сервера:', response.data); 
     
     if (response.data.success) {

@@ -18,7 +18,7 @@ const AdminReportsTab = () => {
       const params = new URLSearchParams();
       if (from) params.append('from', from);
       if (to) params.append('to', to);
-      const response = await axiosInstance.get(`/admin/reports?${params.toString()}`);
+      const response = await axiosInstance.get(`/api/admin/reports?${params.toString()}`);
       if (response.data.success) {
         setReport(response.data.data);
       }
@@ -36,7 +36,7 @@ const AdminReportsTab = () => {
       <SearchBar
         role="admin"
         placeholder="Поиск"
-        onSelect={(patient) => navigate(`/admin/patients/${patient.id}`)}
+        onSelect={(patient) => navigate(`/api/admin/patients/${patient.id}`)}
       />
 
       <div className={styles.filters}>

@@ -27,7 +27,7 @@ const PatientCard = ({ patient, isCompleted }) => {
   };
 
   const handleCardClick = () => {
-    navigate(`/doctor/patient/${patient.id}`);
+    navigate(`/api/doctor/patient/${patient.id}`);
   };
 
   return (

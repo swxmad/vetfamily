@@ -92,7 +92,7 @@ const AdminProfileTab = ({ user, onUpdate }) => {
 
     setLoading(true);
     try {
-      const response = await axiosInstance.put('/admin/profile', {
+      const response = await axiosInstance.put('/api/admin/profile', {
         fullName: formData.fullName,
         gender: formData.gender,
         birthDate: formatDateForServer(formData.birthDate),
@@ -136,7 +136,7 @@ const AdminProfileTab = ({ user, onUpdate }) => {
         newPassword: passForm.newPassword,
         ...(passForm.oldPassword ? { oldPassword: passForm.oldPassword } : { confirmNewPassword: passForm.confirmNewPassword })
       };
-      const res = await axiosInstance.post('/auth/change-password', payload);
+      const res = await axiosInstance.post('/api/auth/change-password', payload);
       if (res.data.success) {
         alert('Пароль изменён');
         setShowPasswordModal(false);
