@@ -32,8 +32,8 @@ const DoctorDetail = () => {
   const fetchDoctorData = async () => {
     try {
       const [doctorRes, patientsRes] = await Promise.all([
-        axiosInstance.get(`/api/admin/doctors/${id}`),
-        axiosInstance.get(`/api/admin/patients`)
+        axiosInstance.get(`/admin/doctors/${id}`),
+        axiosInstance.get(`/admin/patients`)
       ]);
 
       if (doctorRes.data.success) {
@@ -58,7 +58,7 @@ const DoctorDetail = () => {
     } catch (error) {
       console.error('Ошибка загрузки:', error);
       if (error.response?.status === 404) {
-        navigate('/api/admin?tab=doctors');
+        navigate('/admin?tab=doctors');
       }
     } finally {
       setLoading(false);
@@ -69,7 +69,7 @@ const DoctorDetail = () => {
 
   const handleBack = () => {
     if (location.state?.fromTab === 'doctors') {
-      navigate('/api/admin', { state: { activeTab: 'doctors' } });
+      navigate('/admin', { state: { activeTab: 'doctors' } });
     } else {
       navigate(-1);
     }
@@ -149,7 +149,7 @@ const DoctorDetail = () => {
     }
 
     try {
-      const response = await axiosInstance.put(`/api/admin/doctors/${id}`, {
+      const response = await axiosInstance.put(`/admin/doctors/${id}`, {
         fullName: formData.fullName,
         gender: formData.gender,
         birthDate: formatDateForServer(formData.birthDate),
@@ -185,6 +185,17 @@ const DoctorDetail = () => {
     setErrors({});
   };
 
+  const handleDeleteAvatar = async () => {
+    try {
+      await axiosInstance.delete(`/admin/doctors/${id}/avatar`);
+      setFormData(prev => ({ ...prev, avatarUrl: '' }));
+      setDoctor(prev => ({ ...prev, avatarUrl: '' }));
+      alert('Аватар удалён');
+    } catch (error) {
+      alert('Ошибка при удалении аватара');
+    }
+  };
+
   const handleDeleteDoctor = async () => {
     if (!window.confirm('Вы уверены, что хотите удалить этого врача? Все связанные данные будут удалены!')) return;
 
@@ -192,7 +203,7 @@ const DoctorDetail = () => {
       const response = await axiosInstance.delete(`/admin/doctors/${id}`);
       if (response.data.success) {
         alert('Врач удалён из системы');
-        navigate('/api/admin?tab=doctors');
+        navigate('/admin?tab=doctors');
       }
     } catch (error) {
       alert('Ошибка при удалении врача');
@@ -215,7 +226,7 @@ const DoctorDetail = () => {
     }
 
     try {
-      const response = await axiosInstance.post(`/api/admin/doctors/${id}/reset-password`, {
+      const response = await axiosInstance.post(`/admin/doctors/${id}/reset-password`, {
         newPassword,
         adminPassword
       });

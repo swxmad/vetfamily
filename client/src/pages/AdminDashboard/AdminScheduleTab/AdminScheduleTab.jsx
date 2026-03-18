@@ -18,7 +18,7 @@ const AdminScheduleTab = () => {
   useEffect(() => {
     const loadDoctors = async () => {
       try {
-        const response = await axiosInstance.get('/api/admin/doctors');
+        const response = await axiosInstance.get('/admin/doctors');
         if (response.data.success) {
           setDoctors(response.data.doctors);
         }
@@ -36,7 +36,7 @@ const AdminScheduleTab = () => {
       if (from) params.append('from', from);
       if (to) params.append('to', to);
       if (selectedDoctorId) params.append('doctorId', selectedDoctorId);
-      const response = await axiosInstance.get(`/api/visits/schedule?${params.toString()}`);
+      const response = await axiosInstance.get(`/visits/schedule?${params.toString()}`);
       if (response.data.success) {
         setVisits(response.data.visits || []);
       }

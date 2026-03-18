@@ -18,7 +18,7 @@ const DoctorsTab = () => {
 
   const fetchDoctors = async () => {
     try {
-      const response = await axiosInstance.get('/api/admin/doctors');
+      const response = await axiosInstance.get('/admin/doctors');
       if (response.data.success) {
         setDoctors(response.data.doctors);
       }
@@ -30,7 +30,7 @@ const DoctorsTab = () => {
   };
 
   const handleViewDoctor = (doctor) => {
-    navigate(`/api/admin/doctors/${doctor.id}`, { state: { fromTab: 'doctors' } });
+    navigate(`/admin/doctors/${doctor.id}`, { state: { fromTab: 'doctors' } });
   };
   
   const handleCloseModal = () => {
@@ -47,7 +47,7 @@ const DoctorsTab = () => {
     if (!window.confirm('Вы уверены, что хотите удалить этого врача? Все связанные данные будут удалены!')) return;
     
     try {
-      const response = await axiosInstance.delete(`/api/admin/doctors/${id}`);
+      const response = await axiosInstance.delete(`/admin/doctors/${id}`);
       if (response.data.success) {
         setDoctors(doctors.filter(d => d.id !== id));
         alert('Врач удалён из системы');

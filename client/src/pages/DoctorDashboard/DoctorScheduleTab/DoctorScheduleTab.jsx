@@ -18,7 +18,7 @@ const DoctorScheduleTab = () => {
       const params = new URLSearchParams();
       if (from) params.append('from', from);
       if (to) params.append('to', to);
-      const response = await axiosInstance.get(`/api/visits/schedule?${params.toString()}`);
+      const response = await axiosInstance.get(`/visits/schedule?${params.toString()}`);
       if (response.data.success) {
         setVisits(response.data.visits || []);
       }
@@ -73,7 +73,7 @@ const DoctorScheduleTab = () => {
           <div
             key={visit.id}
             className={styles.item}
-            onClick={() => visit.patient && navigate(`/api/doctor/patient/${visit.patient.id}`)}
+            onClick={() => visit.patient && navigate(`/doctor/patient/${visit.patient.id}`)}
           >
             <div className={styles.row}>
               <span className={styles.date}>

@@ -29,8 +29,8 @@ const PatientDetail = () => {
   const fetchPatientData = async () => {
     try {
       const [patientRes, visitsRes] = await Promise.all([
-        axiosInstance.get(`/api/doctor/patients/${id}`),
-        axiosInstance.get(`/api/visits/patient/${id}`)
+        axiosInstance.get(`/doctor/patients/${id}`),
+        axiosInstance.get(`/visits/patient/${id}`)
       ]);
       if (patientRes.data.success) setPatient(patientRes.data.patient);
       if (visitsRes.data.success) setVisits(visitsRes.data.visits);
@@ -53,7 +53,7 @@ const PatientDetail = () => {
       }
     }
     try {
-      const response = await axiosInstance.post('/api/visits', {
+      const response = await axiosInstance.post('/visits', {
         patientId: id,
         ...visitForm
       });
@@ -78,10 +78,10 @@ const PatientDetail = () => {
   const handleCompleteTreatment = async () => {
     if (!window.confirm('Завершить лечение пациента?')) return;
     try {
-      const response = await axiosInstance.put(`/api/doctor/patients/${id}/complete`);
+      const response = await axiosInstance.put(`/doctor/patients/${id}/complete`);
       if (response.data.success) {
         alert('Лечение завершено!');
-        navigate('/api/doctor?tab=patients');
+        navigate('/doctor?tab=patients');
       }
     } catch (error) {
       alert('Ошибка при завершении лечения');
@@ -102,6 +102,8 @@ const PatientDetail = () => {
     }
     return 'Не установлен';
   };
+
+
 
   const handlePrint = () => {
     const latestDiagnosis = getLatestDiagnosis();
@@ -162,7 +164,7 @@ const PatientDetail = () => {
       <main className={styles.main}>
         <div className={styles.patientDetail}>
           <div className={styles.header}>
-            <button className={styles.backButton} onClick={() => navigate('/api/doctor?tab=patients')}>Назад</button>
+            <button className={styles.backButton} onClick={() => navigate('/doctor?tab=patients')}>Назад</button>
             <h1>{patient.name}</h1>
             <div className={styles.actions}>
               <button className={styles.printButton} onClick={handlePrint}>Печать</button>

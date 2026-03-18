@@ -16,7 +16,7 @@ const PatientsTab = () => {
 
   const fetchPatients = async () => {
     try {
-      const response = await axiosInstance.get('/api/admin/patients');
+      const response = await axiosInstance.get('/admin/patients');
       if (response.data.success) {
         setPatients(response.data.patients);
       }
@@ -28,7 +28,7 @@ const PatientsTab = () => {
   };
 
   const handleViewPatient = (patient) => {
-    navigate(`/api/admin/patients/${patient.id}`); 
+    navigate(`/admin/patients/${patient.id}`); 
   };
 
   return (

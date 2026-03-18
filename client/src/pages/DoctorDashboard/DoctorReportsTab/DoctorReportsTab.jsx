@@ -17,7 +17,7 @@ const DoctorReportsTab = () => {
       const params = new URLSearchParams();
       if (from) params.append('from', from);
       if (to) params.append('to', to);
-      const response = await axiosInstance.get(`/api/doctor/reports?${params.toString()}`);
+      const response = await axiosInstance.get(`/doctor/reports?${params.toString()}`);
       if (response.data.success) {
         setReport(response.data.data);
       }
@@ -35,7 +35,7 @@ const DoctorReportsTab = () => {
       <SearchBar
         role="doctor"
         placeholder="Поиск"
-        onSelect={(patient) => navigate(`/api/doctor/patient/${patient.id}`)}
+        onSelect={(patient) => navigate(`/doctor/patient/${patient.id}`)}
       />
 
       <div className={styles.filters}>

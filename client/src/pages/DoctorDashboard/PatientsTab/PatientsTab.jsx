@@ -19,7 +19,7 @@ const PatientsTab = () => {
     setLoading(true);
     try {
       console.log('Запрос пациентов, статус:', activeStatusTab);
-      const response = await axiosInstance.get(`/api/doctor/patients/status?status=${activeStatusTab}`);
+      const response = await axiosInstance.get(`/doctor/patients/status?status=${activeStatusTab}`);
       console.log('Ответ сервера:', response.data);
       if (response.data.success) {
         setPatients(response.data.patients);
@@ -34,13 +34,13 @@ const PatientsTab = () => {
   };
 
   const handleAddPatient = () => {
-    navigate('/api/doctor/patient/new'); 
+    navigate('/doctor/patient/new'); 
   };
 
   const handleDeletePatient = async (id) => {
     if (!window.confirm('Вы уверены, что хотите удалить этого пациента?')) return;
     try {
-      const response = await axiosInstance.delete(`/api/doctor/patients/${id}`);
+      const response = await axiosInstance.delete(`/doctor/patients/${id}`);
       if (response.data.success) {
         setPatients(patients.filter(p => p.id !== id));
       }
@@ -53,7 +53,7 @@ const PatientsTab = () => {
   const handleCompleteTreatment = async (id) => {
     if (!window.confirm('Завершить лечение этого пациента?')) return;
     try {
-      const response = await axiosInstance.put(`/api/doctor/patients/${id}/complete`);
+      const response = await axiosInstance.put(`/doctor/patients/${id}/complete`);
       if (response.data.success) {
         alert('Лечение завершено!');
         fetchPatients();
@@ -71,7 +71,7 @@ const PatientsTab = () => {
       <SearchBar
         role="doctor"
         placeholder="Поиск"
-        onSelect={(patient) => navigate(`/api/doctor/patient/${patient.id}`)}
+        onSelect={(patient) => navigate(`/doctor/patient/${patient.id}`)}
       />
 
       {loading && <div className={styles.loading}>Загрузка пациентов...</div>}

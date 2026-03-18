@@ -33,7 +33,7 @@ const AdminDashboard = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axiosInstance.get('/api/admin/profile');
+      const response = await axiosInstance.get('/admin/profile');
       if (response.data.success) {
         setUser(response.data.user);
         localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -41,7 +41,7 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error('Ошибка получения профиля:', error);
       if (error.response?.status === 401) {
-        navigate('/api/login');
+        navigate('/login');
       }
     } finally {
       setLoading(false);
@@ -58,13 +58,13 @@ const AdminDashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await axiosInstance.post('/api/auth/logout');
+      await axiosInstance.post('/auth/logout');
       localStorage.removeItem('user');
-      navigate('/api/login');
+      navigate('/login');
     } catch (error) {
       console.error('Ошибка выхода:', error);
       localStorage.removeItem('user');
-      navigate('/api/login');
+      navigate('/login');
     }
   };
 

@@ -25,7 +25,7 @@ const SearchBar = ({ role, placeholder = 'Поиск...', onSelect, onChange }) 
     }
     setLoading(true);
     try {
-      const url = role === 'admin' ? '/api/admin/search' : '/api/doctor/search';
+      const url = role === 'admin' ? '/admin/search' : '/doctor/search';
       const response = await axiosInstance.get(`${url}?q=${encodeURIComponent(trimmed)}`);
       if (response.data.success) {
         setResults(response.data.patients || []);

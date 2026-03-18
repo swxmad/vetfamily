@@ -90,10 +90,10 @@ const AddPatientPage = () => {
 
     setLoading(true);
     try {
-      const response = await axiosInstance.post('/api/doctor/patients', formData);
+      const response = await axiosInstance.post('/doctor/patients', formData);
       if (response.data.success) {
         alert('Пациент успешно добавлен!');
-        navigate(`/api/doctor/patient/${response.data.patient.id}`);
+        navigate(`/doctor/patient/${response.data.patient.id}`);
       }
     } catch (error) {
       setErrors({ submit: error.response?.data?.message || 'Ошибка при добавлении' });
@@ -146,7 +146,7 @@ const AddPatientPage = () => {
       <main className={styles.main}>
         <div className={styles.addPatientPage}>
           <div className={styles.header}>
-            <button className={styles.backButton} onClick={() => navigate('/api/doctor')}>Назад</button>
+            <button className={styles.backButton} onClick={() => navigate('/doctor')}>Назад</button>
             <h1>Новый пациент</h1>
             <button className={styles.printButton} onClick={handlePrint} disabled={loading}>
               Печать
